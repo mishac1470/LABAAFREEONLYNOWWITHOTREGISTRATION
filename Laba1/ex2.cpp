@@ -1,5 +1,5 @@
 #include <iostream>
-#include <vector>
+#include <string>
 
 using namespace std;
 
@@ -14,36 +14,52 @@ using namespace std;
 Невыделенную память нельзя освободить.
 */
 
+void fillMasive(int** arr, int height){
+    for(int i = 0; i < height; ++i){
+        for(int j = 0; j <= i; ++j){
+            if(i - 1 > j){
+                *(*(arr + i) + j) = *(*(arr + i - 1) + j) + *(*(arr + i - 2) + j);
+            }
+            else{
+                if(j >= 2){
+                    *(*(arr + i) + j) = *(*(arr + i - 1) + j - 1) + *(*(arr + i - 2) + j - 2);
+                }
+                else{
+                    *(*(arr + i) + j) = 1;
+                }
+            }
+        }
+    }
+}
+
+void printMasive(int** arr, int height){
+   int elementLen, elLen;
+   string lastElement, el;
+   lastElement = to_string(*(*(arr + height - 1) + height - 1));
+   elementLen = lastElement.length();
+    
+    for(int i = 0; i < height; ++i){
+        cout << string((height - i - 1) * elementLen, ' ');
+        for(int j = 0; j <= i; ++j){
+            el = to_string(*(*(arr + i) + j));
+            elLen = el.length();
+            cout << string(elementLen - elLen, ' ') << *(*(arr + i) + j) << string(elementLen, ' ');
+        }
+        cout << '\n';
+    }
+}
+
 int main()
 {
     int height;
     cin >> height;
     
-    vector<vector<int>> arr(height, vector<int> (height));
-    
+    int **arr = new int *[height];
     for(int i = 0; i < height; ++i){
-        for(int j = 0; j <= i; ++j){
-            if(i - 1 > j){
-                arr[i][j] = arr[i - 1][j] + arr[i - 2][j];
-            }
-            else{
-                if(j >= 2){
-                    arr[i][j] = arr[i - 1][j - 1] + arr[i - 2][j - 2];
-                }
-                else{
-                    arr[i][j] = 1;
-                }
-            }
-        }
+        *(arr + i) = new int[i + 1];
     }
     
-    for(int i = 0; i < height; ++i){
-        cout << string((height - i - 1) * 4, ' ');
-        for(int j = 0; j <= i; ++j){
-            printf("%4i    ", arr[i][j]);
-        }
-        cout << '\n';
-    }
-
+   fillMasive(arr, height);
+   printMasive(arr, height); 
     return 0;
 }
