@@ -86,29 +86,28 @@ float srznach(vector<int> masiv)
 vector<int> moda(vector<int> masiv)
 {
     vector<int> Moda{};
-    sort(masiv.begin(), masiv.end());
-    int count = 0, check = 0, max = 0, maxcheck = 0;
-    for(int i: masiv){
-        if (i != check)
-        {
-            if (max == count)
-            {
-                maxcheck = check;
-                Moda.push_back(maxcheck);
-            }
-            
-            if (max < count)
-            {
-                maxcheck = check;
-                Moda.clear();
-                Moda.push_back(maxcheck);
-                max = count;
-            }
-            
-            check = i;
-            count = 0;
+    masiv = shakerSort(masiv);
+    int check = -1, count = 1, max = 1, f = 1;
+    for(int i : masiv){
+        if(i == check){
+            count++;
         }
-        count++;
+        else{
+            count = 1;
+            check = i;
+            f = 1;
+        }
+        if(count == max){
+            if(f == 1){
+                Moda.push_back(i);
+                f = 0;
+            }
+        }
+        if(count > max){
+            Moda.clear();
+            max = count;
+            Moda.push_back(i);
+        }
     }
     return Moda;
 }
