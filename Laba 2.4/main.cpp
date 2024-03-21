@@ -41,8 +41,8 @@ int main(){
     // ch.fill();
     // cout << ch;
 
-    Vector<int> vc1(3);
-    Vector<int> vc2(3);
+    Vector<char> vc1;
+    Vector<char> vc2;
 
     vc1.fill();
     vc2.fill();
@@ -50,7 +50,8 @@ int main(){
     cout << vc1;
     cout << vc2;
 
-    cout << vc1 * vc2;
+    cout << vc1 * vc2 << endl;;
+    cout << (vc1 ^ vc2);
 
     return 0;
 }

@@ -37,9 +37,9 @@ public:
     Matrix(const Matrix<T>& mat){
         line = mat.getLine();
         column = mat.getColumn();
-        data = new int*[line];
+        data = new T*[line];
         for(int j = 0; j < line; ++j){
-            data[j] = new int[column];
+            data[j] = new T[column];
         }
         for(int j = 0; j < line; ++j){
             for(int i = 0; i < column; ++i){
@@ -132,9 +132,9 @@ public:
         this->~Matrix();
         line = mat.getLine();
         column = mat.getColumn();
-        data = new int*[line];
+        data = new T*[line];
         for(int j = 0; j < line; ++j){
-            data[j] = new int[column];
+            data[j] = new T[column];
         }
         for(int j = 0; j < line; ++j){
             for(int i = 0; i < column; ++i){
